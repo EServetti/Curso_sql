@@ -10,6 +10,11 @@ select s.id_sucursal, c.nombre_ciudad, e.monto as egresos, e.mes, e.año from su
 join egresos e on e.id_sucursal = s.id_sucursal
 join ciudades c on (c.id_ciudad = s.id_ciudad);
 
+-- Vista para ver los ingresos/egresos de las sucursales en cada mes
+create view ingresos_egresos as
+select i.id_sucursal, i.monto as ingresos, e.monto as egresos from ingresos i 
+join egresos e on e.id_sucursal = i.id_sucursal and e.mes = i.mes and e.año = i.año;
+
 -- Vista con info basica de las sucursales
 create view info_basica_sucursal as 
 select s.id_sucursal, c.nombre_ciudad as ubicación, p.nombre_provincia as provincia,
@@ -32,6 +37,4 @@ select g.nombre_gerente as nombre, g.edad_gerente as edad, s.id_sucursal,
 c.nombre_ciudad from gerentes g 
 join sucursales s on s.dni_gerente = g.dni_gerente
 join ciudades c on c.id_ciudad = s.id_ciudad;
-
-
 
